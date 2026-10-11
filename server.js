@@ -9,6 +9,13 @@ const app = createApp({
   ollamaUrl: process.env.OLLAMA_URL ?? 'http://127.0.0.1:11434',
   dataDir: process.env.DATA_DIR ?? './data'
 });
+// Registro mínimo para saber si el celular llega a la laptop y cuánto tarda cada respuesta.
+app.on('request', (request, response) => {
+  const started = Date.now();
+  response.on('finish', () => {
+    if (request.url.startsWith('/api/')) console.log(`${new Date().toLocaleTimeString()} ${request.socket.remoteAddress} ${request.method} ${request.url} ${response.statusCode} ${Date.now() - started} ms`);
+  });
+});
 app.on('error', error => { console.error('No se pudo iniciar Guardabosque:', error.message); process.exitCode = 1; });
 app.listen(port, host, () => {
   const actualPort = app.address().port;

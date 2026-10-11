@@ -62,7 +62,7 @@ function resizeImage(file, maxSide, quality) {
       canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
       resolve(canvas.toDataURL('image/jpeg', quality));
     };
-    image.onerror = () => reject(new Error('No se pudo leer la imagen.'));
+    image.onerror = () => reject(new Error(/hei[cf]/i.test(file.type || file.name || '') ? 'Este navegador no abre fotos HEIC. Usa Safari, o cambia la cámara a "Más compatible" (JPG).' : 'No se pudo leer la imagen. Prueba con otra foto en JPG o PNG.'));
     image.src = URL.createObjectURL(file);
   });
 }
@@ -102,5 +102,5 @@ async function loadInitialData() {
 }
 
 document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => showTab(tab.dataset.tab)));
-$('#photo').addEventListener('change', identify); $('#quest-button').addEventListener('click', getQuest); loadInitialData();
+$('#photo').addEventListener('change', identify); $('#gallery').addEventListener('change', identify); $('#quest-button').addEventListener('click', getQuest); loadInitialData();
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
