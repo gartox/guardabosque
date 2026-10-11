@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#124734">
+    <meta name="description" content="Guía de naturaleza offline para Tabasco">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Guardabosque</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">Naturaleza local · sin internet</p>
+        <h1>Guardabosque</h1>
+      </div>
+      <p id="health" class="health" role="status">Comprobando modelo…</p>
+    </header>
+    <nav class="tabs" aria-label="Secciones">
+      <button class="tab is-active" data-tab="identify">Identificar</button>
+      <button class="tab" data-tab="quest">Misión</button>
+      <button class="tab" data-tab="journal">Mi diario</button>
+    </nav>
+    <main>
+      <section id="identify" class="panel is-visible" aria-labelledby="identify-title">
+        <h2 id="identify-title">¿Qué encontraste?</h2>
+        <p class="intro">Toma una foto y sigue caminando. La imagen se procesa en tu dispositivo local.</p>
+        <label class="photo-button" for="photo">Tomar foto</label>
+        <input id="photo" type="file" accept="image/*" capture="environment" hidden>
+        <p id="identify-status" class="status" role="status"></p>
+        <div id="identify-result"></div>
+      </section>
+      <section id="quest" class="panel" aria-labelledby="quest-title" hidden>
+        <h2 id="quest-title">Una misión para caminar</h2>
+        <label for="place">Lugar</label>
+        <select id="place"></select>
+        <label for="minutes">Duración</label>
+        <select id="minutes"><option value="15">15 minutos</option><option value="30" selected>30 minutos</option><option value="60">60 minutos</option><option value="90">90 minutos</option></select>
+        <button id="quest-button" class="primary">Dame una misión</button>
+        <p id="quest-status" class="status" role="status"></p>
+        <div id="quest-result"></div>
+      </section>
+      <section id="journal" class="panel" aria-labelledby="journal-title" hidden>
+        <h2 id="journal-title">Mi diario de campo</h2>
+        <div id="journal-list"></div>
+      </section>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
