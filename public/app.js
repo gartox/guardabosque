@@ -71,13 +71,13 @@ async function identify(event) {
   const file = event.target.files[0]; if (!file) return;
   $('#identify-status').textContent = 'Pensando en el dispositivo… (sin internet)';
   $('#identify-result').replaceChildren();
-  try { state.image = await resizeImage(file, 1024, 0.8); state.result = await request('/api/identify', { method: 'POST', body: JSON.stringify({ image: state.image }) }); renderResult(state.result); $('#identify-status').textContent = ''; }
+  try { state.file = file; state.image = await resizeImage(file, 1024, 0.8); state.result = await request('/api/identify', { method: 'POST', body: JSON.stringify({ image: state.image }) }); renderResult(state.result); $('#identify-status').textContent = ''; }
   catch (error) { $('#identify-status').textContent = error.message; }
   event.target.value = '';
 }
 
 async function saveResult() {
-  try { await request('/api/journal', { method: 'POST', body: JSON.stringify({ result: state.result, thumbnail: await resizeImage(await fetch(state.image).then(response => response.blob()), 256, 0.75), placeId: $('#place').value || 'cerca' }) }); $('#identify-status').textContent = 'Guardado en tu diario.'; }
+  try { await request('/api/journal', { method: 'POST', body: JSON.stringify({ result: state.result, thumbnail: await resizeImage(state.file, 256, 0.75), placeId: $('#place').value || 'cerca' }) }); $('#identify-status').textContent = 'Guardado en tu diario.'; }
   catch (error) { $('#identify-status').textContent = error.message; }
 }
 
