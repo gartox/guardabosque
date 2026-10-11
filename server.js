@@ -5,7 +5,7 @@ const port = Number(process.env.PORT ?? 3000);
 const host = process.env.HOST ?? '0.0.0.0';
 if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('PORT debe ser un puerto válido.');
 const app = createApp({
-  model: process.env.GUARDABOSQUE_MODEL ?? 'gemma4:e4b',
+  model: process.env.GUARDABOSQUE_MODEL ?? 'gemma4:e4b-it-qat',
   ollamaUrl: process.env.OLLAMA_URL ?? 'http://127.0.0.1:11434',
   dataDir: process.env.DATA_DIR ?? './data'
 });

@@ -29,10 +29,14 @@ const string = { type: 'string' };
 export const identificationSchema = {
   type: 'object', additionalProperties: false,
   properties: {
-    kind: { type: 'string', enum: kinds }, commonName: string, scientificName: string,
+    kind: { type: 'string', enum: kinds },
+    commonName: { type: 'string', description: 'Most specific common name in Mexican Spanish, e.g. "Tucán real" rather than "Tucán".' },
+    scientificName: { type: 'string', description: 'Binomial species name if reasonably sure, otherwise genus or family. Empty if unknown.' },
     confidence: { type: 'string', enum: ['low', 'medium', 'high'] },
-    description: string, lookFor: { type: 'array', items: string, maxItems: 4 },
-    safety: string, fieldQuest: string
+    description: { type: 'string', description: 'Two or three plain sentences: what it is and the visible traits that identify it.' },
+    lookFor: { type: 'array', items: { type: 'string', description: 'A short observable cue to check in the field (a feature, call, behaviour or a related species nearby).' }, minItems: 2, maxItems: 4 },
+    safety: { type: 'string', description: 'One or two plain sentences only if this organism poses a specific risk; otherwise an empty string.' },
+    fieldQuest: { type: 'string', description: 'One concrete 5 to 10 minute outdoor activity related to this organism that keeps the user exploring, written as an instruction.' }
   },
   required: ['kind', 'commonName', 'scientificName', 'confidence', 'description', 'lookFor', 'safety', 'fieldQuest']
 };

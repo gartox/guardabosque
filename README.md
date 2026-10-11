@@ -13,7 +13,7 @@ It is designed for parks, wetlands, forests, and neighborhoods where mobile cove
 ## Run it
 
 ```bash
-ollama pull gemma4:e4b
+ollama pull gemma4:e4b-it-qat
 npm start
 ```
 
@@ -25,7 +25,7 @@ Useful configuration defaults are:
 PORT=3000
 HOST=0.0.0.0
 OLLAMA_URL=http://127.0.0.1:11434
-GUARDABOSQUE_MODEL=gemma4:e4b
+GUARDABOSQUE_MODEL=gemma4:e4b-it-qat
 DATA_DIR=./data
 ```
 

@@ -40,7 +40,7 @@ function validatePlace(placeId) {
   if (placeId !== undefined && (typeof placeId !== 'string' || !places.some(place => place.id === placeId))) throw new HttpError(400, 'El lugar no es válido.');
 }
 export function createApp(input = {}) {
-  const config = { model: 'gemma4:e4b', ollamaUrl: 'http://127.0.0.1:11434', dataDir: './data', ...input };
+  const config = { model: 'gemma4:e4b-it-qat', ollamaUrl: 'http://127.0.0.1:11434', dataDir: './data', ...input };
   const journal = createJournal(config.dataDir);
   return createServer(async (request, response) => {
     try {
